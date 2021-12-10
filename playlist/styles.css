@@ -1,0 +1,45 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+header h1 {
+  color: blue;
+}
+header {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.download-item {
+  margin: 10px;
+  text-align: center;
+  background-color: rgb(201, 199, 199);
+}
+
+.container {
+  text-align: center;
+  left: 0;
+  right: 0;
+}
+
+#loader-spinner {
+  margin: 30px;
+  text-align: center;
+  visibility: hidden;
+}
+#loader-spinner > * {
+  margin: 10px;
+  text-align: center;
+}
+
+.next-button {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 100px;
+  visibility: hidden;
+}
+.card-text {
+  text-align: left;
+}
