@@ -9,14 +9,68 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
 
     <title>Downloader</title>
   </head>
   <body>
-    <div class="container">
-      <div><a href="video.html">Video Downloader</a></div>
-      <div><a href="playlist.html">Playlist Downloader</a></div>
-    </div>
+    <noscript> Enable Javascript in your browser to view webpage </noscript>
+
+    <header>
+      <h1>Video Downloader</h1>
+    </header>
+
+    <main>
+      <!-- Container -->
+      <div class="container">
+        <!-- URL Input-->
+        <div class="input-group mb-3">
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="paste-button"
+            onclick="pasteLink()"
+          >
+            <i class="fa fa-clipboard" aria-hidden="true"></i>
+          </button>
+          <input
+            type="search"
+            class="form-control"
+            placeholder="Enter Video URL"
+            id="video-url"
+            autofocus
+            required
+          />
+          <button class="btn btn-primary" type="button" onclick="submit()">
+            Go
+          </button>
+        </div>
+        <!-- URL Input-->
+      </div>
+      <!-- Container -->
+
+      <!-- Bootstrap Spinner -->
+      <div id="loader-spinner">
+        <div class="spinner-border"></div>
+        <div>
+          Processing your request. Please don't close or refresh your browser!
+        </div>
+      </div>
+      <!-- Bootstrap Spinner -->
+
+      <!-- Dynamic Container-->
+      <div class="container">
+        <div id="dynamic-data"></div>
+      </div>
+      <!-- Dynamic Container-->
+    </main>
+    <footer></footer>
 
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -29,5 +83,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="script.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
   </body>
 </html>
