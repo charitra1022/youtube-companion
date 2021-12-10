@@ -44,7 +44,7 @@
         </div>
         <!-- URL Input-->
 
-        <!-- Start Index Input-->
+        <!-- Start Index Input-
         <div class="input-group mb-3">
           <span class="input-group-text">Start index</span>
           <input
@@ -54,13 +54,12 @@
             min="1"
             value="1"
             id="start-index"
-            oninput="updateStopIndex()"
-            required
+            disabled
           />
         </div>
         <!-- Start Index Input-->
 
-        <!-- Stop Index Input -->
+        <!-- Stop Index Input 
         <div class="input-group mb-3">
           <span class="input-group-text">Stop index</span>
           <input
@@ -74,7 +73,7 @@
           />
         </div>
         <!-- Stop Index Input-->
-        <!-- <small>You can download 5 videos at a time.</small> -->
+        <!-- <small>You can download 5 videos at a time.</small> -
         <p><em>You can download 10 videos at a time.</em></p>
 
         <!-- File Format Input-->
@@ -108,6 +107,12 @@
         <!-- File Format Input-->
       </div>
       <!-- Container -->
+
+      <!-- Next Button -->
+      <div id="next-button">
+        <button class="btn btn-primary" onclick="nextButtonPressed()">Next</button>
+      </div>
+      <!-- Next Button -->
 
       <!-- Bootstrap Spinner -->
       <div id="loader-spinner">
