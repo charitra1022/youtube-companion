@@ -62,9 +62,9 @@ function processResponse(data, stopIndex) {
   const pageInfo = data.pageInfo;
   const items = data.items;
   const totalResults = parseInt(pageInfo.totalResults);
-  const startIndex = stopIndex - offset + 1;
+  const startIndex = stopIndex - videoCapacity + 1;
 
-  // if(totalResults <= offset){
+  // if(totalResults <= videoCapacity){
     
   // }
 
