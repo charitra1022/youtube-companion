@@ -3,3 +3,13 @@
   text-align: center;
   background-color: rgb(201, 199, 199);
 }
+
+#loader-spinner{
+  margin: 30px;
+  text-align: center;
+  visibility: hidden;
+}
+#loader-spinner > * {
+  margin: 10px;
+  text-align: center;
+}

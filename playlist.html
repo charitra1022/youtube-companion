@@ -15,7 +15,7 @@
       integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0="
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
 
     <title>Downloader</title>
   </head>
@@ -39,6 +39,7 @@
             class="form-control"
             placeholder="Enter Playlist URL"
             id="playlist-url"
+            required
           />
         </div>
         <!-- URL Input-->
@@ -54,6 +55,7 @@
             value="1"
             id="start-index"
             oninput="updateStopIndex()"
+            required
           />
         </div>
         <!-- Start Index Input-->
@@ -66,14 +68,14 @@
             class="form-control"
             placeholder="Video Index to stop at"
             min="1"
-            value="5"
+            value="10"
             id="stop-index"
             disabled
           />
         </div>
         <!-- Stop Index Input-->
         <!-- <small>You can download 5 videos at a time.</small> -->
-        <p><em>You can download 5 videos at a time.</em></p>
+        <p><em>You can download 10 videos at a time.</em></p>
 
         <!-- File Format Input-->
         <div class="input-group">
@@ -99,11 +101,20 @@
             <option value="4k">Video (4k)</option>
             <option value="8k">Video (8k)</option>
           </select>
-          <button class="btn btn-primary" type="button" onclick="submit()">Go</button>
+          <button class="btn btn-primary" type="button" onclick="submit()">
+            Go
+          </button>
         </div>
         <!-- File Format Input-->
       </div>
       <!-- Container -->
+
+      <!-- Bootstrap Spinner -->
+      <div id="loader-spinner">
+        <div class="spinner-border"></div>
+        <div>Processing your request. Please don't close or refresh your browser!</div>
+      </div>
+      <!-- Bootstrap Spinner -->
 
       <!-- Dynamic Container-->
       <div class="container" id="dynamic-data"></div>

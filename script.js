@@ -1,3 +1,5 @@
+const videoCapacity = 10;
+
 /*
 m4a
 aac
@@ -34,6 +36,16 @@ function validateUrl(url) {
   return null;
 }
 
+function showLoaderAnimation(state) {
+  // toggles the loader spinner animation
+  const div = document.getElementById("loader-spinner");
+  if (state) {
+    div.style.visibility = "visible";
+  } else {
+    div.style.visibility = "hidden";
+  }
+}
+
 async function fetchData(requestUrl) {
   /* Fetchs the playlist data from YouTube API v3 and returns a json object */
   var data = await fetch(requestUrl)
@@ -50,10 +62,10 @@ function processResponse(data, stopIndex) {
   const pageInfo = data.pageInfo;
   const items = data.items;
   const totalResults = parseInt(pageInfo.totalResults);
-  const startIndex = stopIndex - 5 + 1;
+  const startIndex = stopIndex - offset + 1;
 
-  // if(totalResults <= 5){
-
+  // if(totalResults <= offset){
+    
   // }
 
   console.log(
@@ -149,20 +161,21 @@ function work() {
   /* Called on the Button press in DOM */
   // https://www.youtube.com/watch?v=sCVcZCZErc0&list=PLFeDMILzRP2JXNqq5UA0nLmtAsnCcjMJI //15video
   // https://www.youtube.com/playlist?list=PLFeDMILzRP2Jii4SAQNcuMd-M7Bw0Hgan //3video
+  // https://www.youtube.com/playlist?list=PL_A4M5IAkMaexM2nxZt512ESPt83EshJq //99videos
 
   const url = document.getElementById("playlist-url").value;
-  const start = parseInt(document.getElementById("start-index").value);
-  const fileFormat = document.getElementById("download-type").value;
-  const stop = start + 5 - 1;
-  console.log("Download Type:", fileFormat);
+  if (!url) return;
 
-  if (!url) {
-    alert("empty");
-    return;
-  }
-  //console.log(url);
+  const startValue = document.getElementById("start-index").value;
+  if (!startValue) return;
+
+  const startIndex = parseInt(startValue);
+  const fileFormat = document.getElementById("download-type").value;
+
+  const stopIndex = startIndex + videoCapacity - 1;
 
   var playlistId = validateUrl(url);
+
   if (playlistId === null) {
     alert("Incorrect URL");
     document.getElementById("playlist-url").value = "";
@@ -170,20 +183,21 @@ function work() {
     return;
   }
 
-  //console.log(playlistId);
-
   const api = "AIzaSyCbXdXTzINCD6H6HMejdNvXJkp5zkeg-Jc";
   const parts = ["snippet", "contentDetails"];
   const request = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=${parts.join(
     "%2C"
   )}&maxResults=50&playlistId=${playlistId}&key=${api}`;
-  //console.log(request);
 
   document.getElementById("dynamic-data").innerHTML = "";
   var data = [];
+  showLoaderAnimation(true);
   data = fetchData(request)
     .then((data) => processResponse(data, stop))
-    .then((data) => createDivs(data, fileFormat));
+    .then((data) => {
+      showLoaderAnimation(false);
+      createDivs(data, fileFormat);
+    });
 
   //createDivs(data);
 }
