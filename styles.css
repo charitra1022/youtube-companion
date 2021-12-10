@@ -1,22 +1,29 @@
-body{
+body {
   padding: 0;
   margin: 0;
 }
+header h1 {
+  color: blue;
+}
+header {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
 
-.download-item{
+.download-item {
   margin: 10px;
   text-align: center;
   background-color: rgb(201, 199, 199);
 }
 
-.container{
+.container {
   text-align: center;
-  background-color: antiquewhite;
   left: 0;
   right: 0;
 }
 
-#loader-spinner{
+#loader-spinner {
   margin: 30px;
   text-align: center;
   visibility: hidden;
@@ -26,13 +33,13 @@ body{
   text-align: center;
 }
 
-.next-button{
+.next-button {
   text-align: center;
   display: flex;
   flex-direction: column;
   margin: 10px 100px;
   visibility: hidden;
 }
-.card-text{
+.card-text {
   text-align: left;
 }

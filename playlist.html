@@ -31,14 +31,15 @@
       <div class="container">
         <!-- URL Input-->
         <div class="input-group mb-3">
-          <button type="button" class="btn btn-primary" id="paste-button">
+          <button type="button" class="btn btn-primary" id="paste-button" onclick="pasteLink()">
             <i class="fa fa-clipboard" aria-hidden="true"></i>
           </button>
           <input
-            type="text"
+            type="search"
             class="form-control"
             placeholder="Enter Playlist URL"
             id="playlist-url"
+            autofocus
             required
           />
         </div>

@@ -13,6 +13,12 @@ file type parameters for Loader.to API
 [ m4a aac flac opus ogg wav webm 360 480 720 1080 4k 8k ]
 */
 
+function pasteLink(){
+  // pastes link from the user clipboard
+  const inputBox = document.getElementById("playlist-url");
+  var text = navigator.clipboard.readText().then(txt=>inputBox.value=txt);
+}
+
 function validateUrl(url) {
   /* Checks if a playlist url is correct or not, and extracts the id from it */
   var regExp = /^.*(youtu.be\/|list=)([^#\&\?]*).*/;
