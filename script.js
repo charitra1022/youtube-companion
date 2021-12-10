@@ -1,44 +1,17 @@
-const videoCapacity = 10;
-var nextPageToken = undefined;
-var currentStartIndex = 1;
-var fetchedData = [];
-var nextPageAvailable = false;
-var playlistId = "";
-var fileFormat = "";
-var currentPage = 0;
-var pages = [];
-var numberOfPagesPossible = 1;
+const videoCapacity = 10; //number of videos per page
+var nextPageToken = undefined; //holds the net page token in YouTube API pagination system
+var playlistId = ""; //holds the YouTube playlist ID
+var fileFormat = ""; // holds the download file type
+var currentPage = 1; // current page in the YouTube API pagination system
+var numberOfPagesPossible = 1; // number of pages in YouTube API pagination system
+
+var currentPageSegment = 0; //current subdivision of a page in view
+var pages = []; // holds all the subdivisions of a page, usually in groups of 10
 
 /*
-m4a
-aac
-flac
-opus
-ogg
-wav
-webm
-360
-480
-720
-1080
-4k
-8k
+file type parameters for Loader.to API
+[ m4a aac flac opus ogg wav webm 360 480 720 1080 4k 8k ]
 */
-
-// function updateStopIndex() {
-//   /* Edits the stop index input box when start index input is given */
-//   try {
-//     if (document.getElementById("start-index").value === "0") {
-//       document.getElementById("start-index").value = "1";
-//     }
-//     const start = parseInt(document.getElementById("start-index").value);
-//     document.getElementById("stop-index").value = String(
-//       start + videoCapacity - 1
-//     );
-//   } catch (e) {
-//     console.log(e);
-//   }
-// }
 
 function validateUrl(url) {
   /* Checks if a playlist url is correct or not, and extracts the id from it */
@@ -62,11 +35,13 @@ function showLoaderAnimation(state) {
 
 function showNextButton(state) {
   // toggles visibility state of the next button
-  const btn = document.getElementById("next-button");
+  const btn = document.getElementsByClassName("next-button");
   if (state) {
-    btn.style.visibility = "visible";
+    for(let i=0; i<btn.length; i++)
+      btn[i].style.visibility = "visible";
   } else {
-    btn.style.visibility = "hidden";
+    for(let i=0; i<btn.length; i++)
+      btn[i].style.visibility = "hidden";
   }
 }
 
@@ -77,7 +52,7 @@ function createRequestUrl(parts, playlistId, api, pageToken = undefined) {
   const keyParameter = `&key=${api}`;
   var tokenParameter = "";
 
-  if (pageToken !== undefined) tokenParameter = pageToken;
+  if (pageToken !== undefined) tokenParameter = `&pageToken=${pageToken}`;
 
   const requestUrl = `https://youtube.googleapis.com/youtube/v3/playlistItems?maxResults=50${partsParameter}${playlistIdParameter}${keyParameter}${tokenParameter}`;
 
@@ -99,14 +74,18 @@ function filterData(data) {
   // takes out only required fields from the fetched youtube data
 
   const videoId = data.contentDetails.videoId;
+  const owner = data.snippet.channelTitle;
+  const channelId = data.snippet.channelId;
   const videoIndex = data.snippet.position;
   const thumbnail = data.snippet.thumbnails.medium.url;
   const publishedAt = new Date(data.snippet.publishedAt);
   const title = data.snippet.title;
   const publishDate =
     `${("0" + publishedAt.getDate()).slice(-2)}-` +
-    `${("0" + publishedAt.getMonth()).slice(-2)}-` +
+    `${("0" + (publishedAt.getMonth()+1)).slice(-2)}-` +
     `${publishedAt.getFullYear()}`;
+
+
 
   var videoData = {};
   videoData["id"] = videoId;
@@ -114,6 +93,8 @@ function filterData(data) {
   videoData["thumbnail"] = thumbnail;
   videoData["date"] = publishDate;
   videoData["title"] = title;
+  videoData["owner"] = owner;
+  videoData["channelId"] = channelId;
 
   return videoData;
 }
@@ -136,7 +117,6 @@ function processResponse(data) {
   const items = data.items;
 
   const totalResults = parseInt(data.pageInfo.totalResults);
-  const resultsPerPage = parseInt(data.pageInfo.resultsPerPage);
 
   let dataSegment = [];
   for (let i of items) {
@@ -145,7 +125,7 @@ function processResponse(data) {
   }
 
   pages = createGroups(dataSegment, videoCapacity);
-  console.log(pages);
+  numberOfPagesPossible = parseInt(Math.ceil(totalResults / 50));
 }
 
 function createDivs(data) {
@@ -157,10 +137,27 @@ function createDivs(data) {
   for (let i of data) {
     const button = `<div><iframe loading='lazy' sandbox='${sandbox}' style='width:230px;height:60px;border:0;overflow:hidden;' scrolling='no' src='https://loader.to/api/button/?url=https://www.youtube.com/watch?v=${i.id}&f=${fileFormat}&color=64c896'></iframe></div>`;
 
-    const titleLink = `<a href='https://www.youtube.com/watch?v=${i.id}' target='_blank'>${i.title}</a>`;
-    const img = `<div><img src=${i.thumbnail}></img></div>`;
-    const date = `<div>${i.date}</div>`;
-    const html = `<div class='download-item'>${titleLink}${img}${date}${button}</div>`;
+    var title = i.title;
+    if (title.length > 60) {
+      title = title.substring(0, 56) + " ...";
+    }
+
+    const titleLink = `<h6 class='card-title'><a href='https://www.youtube.com/watch?v=${i.id}' target='_blank'>${title}</a></h6>`;
+    const img = `<img class='card-img-top' src=${i.thumbnail}></img>`;
+    const date = `Uploaded On: ${i.date}`;
+    const uploader = `Uploaded By: <a target='_blank' href='https://www.youtube.com/channel/${i.channelId}'>${i.owner}</a> `;
+    const details = `<p class='card-text'>${date}<br/>${uploader}</p>`;
+
+    const html = `<div class='card download-item col' style='width: 22.5rem;'>
+                    ${img}
+                    <div class='card-body'>
+                      ${titleLink}
+                      ${details}
+                      ${button}
+                    </div>
+                  </div>`;
+
+    //const html = `<div class='download-item'>${titleLink}${img}${date}${button}</div>`;
 
     const content = domObject.innerHTML;
     domObject.innerHTML = content + html;
@@ -179,30 +176,47 @@ function initiateProcess(pageToken = undefined) {
 
   const request = createRequestUrl(parts, playlistId, api, pageToken);
 
-  data = fetchData(request)
+  fetchData(request)
     .then((data) => {
-      fetchedData = data;
       nextPageToken = data.nextPageToken;
       showNextButton(true);
       processResponse(data);
     })
-    .then((data) => showLoaderAnimation(false));
+    .then((data) => {
+      nextButtonPressed();
+      showLoaderAnimation(false);
+    });
 }
 
 function nextButtonPressed() {
-  currentPage++;
+  currentPageSegment++;
 
-  if (currentPage>pages.length){
-    console.log("page:", currentPage);
-    console.log("pages:", pages.length);
-    alert("last page!");
-    return
+  if (currentPageSegment > pages.length) {
+    if (nextPageToken === undefined) {
+      alert("No more videos available!");
+    } else {
+      currentPageSegment = 0;
+      initiateProcess(nextPageToken);
+      // alert("new fetch request abondoned!");
+    }
+    console.log("next page:", nextPageToken);
+    return;
   }
 
   document.getElementById("dynamic-data").innerHTML = "";
-  createDivs(pages[currentPage-1]);
+  createDivs(pages[currentPageSegment - 1]);
+}
 
-  
+function reset() {
+  // resets all the values and states
+  nextPageToken = undefined;
+  playlistId = "";
+  fileFormat = "";
+  currentPageSegment = 0;
+  pages = [];
+  numberOfPagesPossible = 1;
+  currentPage = 1;
+  showNextButton(false);
 }
 
 function work() {
@@ -211,7 +225,7 @@ function work() {
   // https://www.youtube.com/playlist?list=PLFeDMILzRP2Jii4SAQNcuMd-M7Bw0Hgan //3video
   // https://www.youtube.com/playlist?list=PL_A4M5IAkMaexM2nxZt512ESPt83EshJq //99videos
 
-  showNextButton(false);
+  reset();
   const url = document.getElementById("playlist-url").value;
   if (!url) return;
 

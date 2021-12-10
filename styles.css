@@ -1,7 +1,19 @@
+body{
+  padding: 0;
+  margin: 0;
+}
+
 .download-item{
-  margin: 40px;
+  margin: 10px;
   text-align: center;
   background-color: rgb(201, 199, 199);
+}
+
+.container{
+  text-align: center;
+  background-color: antiquewhite;
+  left: 0;
+  right: 0;
 }
 
 #loader-spinner{
@@ -14,10 +26,13 @@
   text-align: center;
 }
 
-#next-button{
+.next-button{
   text-align: center;
   display: flex;
   flex-direction: column;
   margin: 10px 100px;
   visibility: hidden;
+}
+.card-text{
+  text-align: left;
 }
