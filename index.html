@@ -47,13 +47,28 @@
 
       <!-- Container -->
       <div class="container">
+        <h4>Quick Guide</h4>
+        <div>
+          <p>
+            <strong>Video Downloader</strong> To download single YouTube video.
+            <br>
+            <strong>Playlist Downloader</strong> To download complete YouTube playlist.
+          </p>
+        </div>
+
+        <h4>About Us</h4>
         <p>
-          YouTube Companion is the best YouTube video downloader that can let
-          you download single YouTube video or complete YouTube playlist!
+          YouTube Companion is the best
+          <strong>YouTube video downloader</strong> that can let you download
+          single YouTube video or complete YouTube playlist!
         </p>
+
         <h4>Why we?</h4>
         <ul>
-          <li>Its completely free of cost</li>
+          <li>
+            Its completely <strong>free</strong> of cost! And will remain free
+            for lifetime!
+          </li>
           <li>
             Lets you download videos in multiple formats (<strong>mp4</strong>,
             <strong>mp3</strong>, <strong>ogg</strong>, <strong>webm</strong>,
@@ -67,12 +82,36 @@
             <strong>1440p</strong>, <strong>4k</strong>, <strong>8k</strong>,
             etc.)
           </li>
+          <li>Its completely <strong>SAFE</strong>!</li>
+        </ul>
+
+        <h4>Supported Audio Files</h4>
+        <ul>
+          <li>m4a</li>
+          <li>aac</li>
+          <li>flac</li>
+          <li>opus</li>
+          <li>ogg</li>
+          <li>wav</li>
+          <li>webm</li>
+        </ul>
+
+        <h4>Supported Video Resolutions</h4>
+        <ul>
+          <li>360p</li>
+          <li>480p</li>
+          <li>720p</li>
+          <li>1080p</li>
+          <li>4k</li>
+          <li>8k</li>
         </ul>
       </div>
+      <a id="scrolltotop" href="#"><i class="fa fa-chevron-up"></i></a>
     </main>
 
     <footer>
-      Made with ❤ by <a href="https://github.com/charitra1022">Charitra Agarwal</a>
+      Made with ❤ by
+      <a href="https://github.com/charitra1022" target="_blank">Charitra Agarwal</a>
     </footer>
 
     <div class="container"></div>
@@ -87,5 +126,25 @@
       integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
       crossorigin="anonymous"
     ></script>
+
+    <script>
+      /* SCROLL TO TOP jQuery code for smooth animation and fade effects */
+      var offset = 200; //pixels for triggering the button. More the value, more scrolling needed to trigger the button
+      var duration = 300; //miliseconds latency for animation. More value, slower the animation
+
+      $(window).scroll(function () {
+        if ($(this).scrollTop() > offset) {
+          $("#scrolltotop").fadeIn(duration); // hide the scroll button
+        } else {
+          $("#scrolltotop").fadeOut(duration); // unhide the scrolling button
+        }
+      });
+
+      $("#scrolltotop").click(function (event) {
+        event.preventDefault();
+        $("html, body").animate({ scrollTop: 0 }, duration); // animate the scrolling event
+        return false;
+      });
+    </script>
   </body>
 </html>
