@@ -26,3 +26,8 @@ header {
   margin: 10px;
   text-align: center;
 }
+
+#icon{
+  width: 60px;
+  padding: 10px;
+}

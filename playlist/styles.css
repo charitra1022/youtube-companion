@@ -43,3 +43,8 @@ header {
 .card-text {
   text-align: left;
 }
+
+#icon{
+  width: 60px;
+  padding: 10px;
+}

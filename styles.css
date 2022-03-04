@@ -44,6 +44,11 @@ footer a {
   text-decoration: none;
 }
 
+#icon{
+  width: 60px;
+  padding: 10px;
+}
+
 /* SCROLL TO TOP STYLES */
 #scrolltotop {
   position: fixed;
