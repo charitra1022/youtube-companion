@@ -9,14 +9,73 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
 
     <title>Downloader</title>
   </head>
   <body>
-    <div class="container">
-      <div><a href="video/video.html">Video Downloader</a></div>
-      <div><a href="playlist/playlist.html">Playlist Downloader</a></div>
-    </div>
+    <header>
+      <h1>YouTube Companion</h1>
+    </header>
+
+    <main>
+      <!-- Button Container -->
+      <div class="button-container">
+        <a href="video/video.html">
+          <button type="button" class="btn btn-primary">
+            Video Downloader
+          </button>
+        </a>
+      </div>
+
+      <div class="button-container">
+        <a href="playlist/playlist.html">
+          <button type="button" class="btn btn-primary">
+            Playlist Downloader
+          </button>
+        </a>
+      </div>
+
+      <!-- Adds a vertical space -->
+      <vspace></vspace>
+
+      <!-- Container -->
+      <div class="container">
+        <p>
+          YouTube Companion is the best YouTube video downloader that can let
+          you download single YouTube video or complete YouTube playlist!
+        </p>
+        <h4>Why we?</h4>
+        <ul>
+          <li>Its completely free of cost</li>
+          <li>
+            Lets you download videos in multiple formats (<strong>mp4</strong>,
+            <strong>mp3</strong>, <strong>ogg</strong>, <strong>webm</strong>,
+            <strong>aac</strong>, <strong>mp4</strong>, <strong>flac</strong>,
+            etc.)
+          </li>
+          <li>
+            Lets you download videos in multiple resolutions
+            (<strong>360p</strong>, <strong>480p</strong>,
+            <strong>720p</strong>, <strong>1080p</strong>,
+            <strong>1440p</strong>, <strong>4k</strong>, <strong>8k</strong>,
+            etc.)
+          </li>
+        </ul>
+      </div>
+    </main>
+
+    <footer>
+      Made with ❤ by <a href="https://github.com/charitra1022">Charitra Agarwal</a>
+    </footer>
+
+    <div class="container"></div>
 
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
@@ -28,6 +87,5 @@
       integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
       crossorigin="anonymous"
     ></script>
-    <script src="script.js"></script>
   </body>
 </html>
