@@ -229,16 +229,38 @@ function work() {
   // https://www.youtube.com/playlist?list=PLFeDMILzRP2Jii4SAQNcuMd-M7Bw0Hgan //3video
   // https://www.youtube.com/playlist?list=PL_A4M5IAkMaexM2nxZt512ESPt83EshJq //99videos
 
-  reset();
   const url = document.getElementById("playlist-url").value;
   if (!url) return;
+
+  reset(); // cannot be shifted from here
 
   fileFormat = document.getElementById("download-type").value;
 
   playlistId = validateUrl(url);
 
+  document.getElementById("dynamic-data").innerHTML = "";
+
   if (playlistId === null) {
-    alert("Incorrect URL");
+    var msg = "Incorrect URL";
+
+    let alert_div = document.createElement("div");
+
+    alert_div.innerHTML = `<div
+            class="alert alert-warning alert-dismissible fade show"
+            role="alert"
+          >
+            <strong><i class="fa fa-warning" aria-hidden="true"></i
+              ></strong> <span>${msg}</span>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>`;
+
+    document.querySelector("#alert-container").appendChild(alert_div);
+    
     document.getElementById("playlist-url").value = "";
     document.getElementById("playlist-url").focus();
     return;
