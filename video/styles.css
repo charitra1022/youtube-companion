@@ -44,3 +44,20 @@ main{
   position: relative;
   min-height: 100vh;
 }
+
+#alert-container{
+  padding: 10px 0;
+}
+
+@keyframes append-animate {
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+.alert{
+  animation: append-animate .4s linear;
+}

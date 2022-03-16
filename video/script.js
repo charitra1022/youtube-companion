@@ -20,7 +20,7 @@ function validateUrl(url) {
     console.log("Video Link Detected");
     return matchVideo[1];
   } else if (matchShorts && matchShorts[1]) {
-    console.log("Shorts Link Detected")
+    console.log("Shorts Link Detected");
     return matchShorts[1];
   }
   return null;
@@ -44,15 +44,37 @@ function work() {
   // https://youtu.be/sCVcZCZErc0
   // https://www.youtube.com/shorts/mOf0YsvpW5g
   // https://youtube.com/shorts/mOf0YsvpW5g?feature=share
-  
+
+
   const url = document.getElementById("video-url").value;
   if (!url) return;
 
   videoId = validateUrl(url);
   console.log("Video ID: " + videoId);
 
+  document.getElementById("dynamic-data").innerHTML = "";
+
   if (videoId === null) {
-    alert("Incorrect URL");
+    var msg = "Incorrect URL";
+
+    let alert_div = document.createElement("div");
+
+    alert_div.innerHTML = `<div
+            class="alert alert-warning alert-dismissible fade show"
+            role="alert"
+          >
+            <strong><i class="fa fa-warning" aria-hidden="true"></i
+              ></strong> <span>${msg}</span>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>`;
+
+    document.querySelector("#alert-container").appendChild(alert_div);
+
     document.getElementById("video-url").value = "";
     document.getElementById("video-url").focus();
     return;
