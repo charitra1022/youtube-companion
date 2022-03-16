@@ -8,13 +8,20 @@ function pasteLink() {
 
 function validateUrl(url) {
   /* Checks if a video url is correct or not, and extracts the id from it */
-  var regExp =
+  var regExpVideo =
     /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
 
-  var match = url.match(regExp);
+  var regExpShorts = /^.*(?:youtube\.com\/shorts\/)([^#\&\?]*).*/;
 
-  if (match && match[1]) {
-    return match[1];
+  var matchVideo = url.match(regExpVideo);
+  var matchShorts = url.match(regExpShorts);
+
+  if (matchVideo && matchVideo[1]) {
+    console.log("Video Link Detected");
+    return matchVideo[1];
+  } else if (matchShorts && matchShorts[1]) {
+    console.log("Shorts Link Detected")
+    return matchShorts[1];
   }
   return null;
 }
@@ -50,6 +57,7 @@ function work() {
   if (!url) return;
 
   videoId = validateUrl(url);
+  console.log("Video ID: " + videoId);
 
   if (videoId === null) {
     alert("Incorrect URL");
