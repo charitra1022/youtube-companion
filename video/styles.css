@@ -12,22 +12,35 @@ header {
 }
 
 .container {
-  text-align: center;
+  text-align: left;
   left: 0;
   right: 0;
-}
-
-#loader-spinner {
-  margin: 30px;
-  text-align: center;
-  visibility: hidden;
-}
-#loader-spinner > * {
-  margin: 10px;
-  text-align: center;
 }
 
 #icon{
   width: 60px;
   padding: 10px;
+}
+
+vspace {
+  display: block;
+  margin: 0;
+  border: 0;
+  padding: 30px;
+}
+
+footer {
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+  background-color: rgb(226, 229, 231);
+}
+
+footer a {
+  text-decoration: none;
+}
+
+main{
+  position: relative;
+  min-height: 100vh;
 }
