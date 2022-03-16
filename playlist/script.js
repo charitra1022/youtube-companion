@@ -197,11 +197,28 @@ function nextButtonPressed() {
 
   if (currentPageSegment > pages.length) {
     if (nextPageToken === undefined) {
-      alert("No more videos available!");
+      var msg = "No more videos available!";
+
+      let alert_div = document.createElement("div");
+
+      alert_div.innerHTML = `<div
+            class="alert alert-info alert-dismissible fade show"
+            role="alert"
+          >
+            <strong>Info <i class="fa fa-info-circle" aria-hidden="true"></i
+              ></strong>&nbsp;&nbsp;<span>${msg}</span>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>`;
+
+      document.querySelector("#alert-container").appendChild(alert_div);
     } else {
       currentPageSegment = 0;
       initiateProcess(nextPageToken);
-      // alert("new fetch request abondoned!");
     }
     console.log("next page:", nextPageToken);
     return;
@@ -260,7 +277,7 @@ function work() {
           </div>`;
 
     document.querySelector("#alert-container").appendChild(alert_div);
-    
+
     document.getElementById("playlist-url").value = "";
     document.getElementById("playlist-url").focus();
     return;
