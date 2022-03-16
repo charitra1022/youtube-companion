@@ -26,16 +26,6 @@ function validateUrl(url) {
   return null;
 }
 
-function showLoaderAnimation(state) {
-  // toggles the loader spinner animation
-  const div = document.getElementById("loader-spinner");
-  if (state) {
-    div.style.visibility = "visible";
-  } else {
-    div.style.visibility = "hidden";
-  }
-}
-
 function createDiv(videoId) {
   // creates the video card for display
 
@@ -49,10 +39,12 @@ function createDiv(videoId) {
 
 function work() {
   /* Called on the Button press in DOM */
-  // https://www.youtube.com/watch?v=sCVcZCZErc0&list=PLFeDMILzRP2JXNqq5UA0nLmtAsnCcjMJI //15video
-  // https://www.youtube.com/video?list=PLFeDMILzRP2Jii4SAQNcuMd-M7Bw0Hgan //3video
-  // https://www.youtube.com/video?list=PL_A4M5IAkMaexM2nxZt512ESPt83EshJq //99videos
-
+  // https://www.youtube.com/watch?v=sCVcZCZErc0&list=PLFeDMILzRP2JXNqq5UA0nLmtAsnCcjMJI
+  // https://www.youtube.com/watch?v=sCVcZCZErc0
+  // https://youtu.be/sCVcZCZErc0
+  // https://www.youtube.com/shorts/mOf0YsvpW5g
+  // https://youtube.com/shorts/mOf0YsvpW5g?feature=share
+  
   const url = document.getElementById("video-url").value;
   if (!url) return;
 
