@@ -33,6 +33,11 @@ vspace {
   padding: 30px;
 }
 
+main{
+  position: relative;
+  min-height: 100vh;
+}
+
 footer {
   width: 100%;
   text-align: center;
