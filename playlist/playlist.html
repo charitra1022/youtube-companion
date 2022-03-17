@@ -191,7 +191,7 @@
 
       $("#scrolltotop").click(function (event) {
         event.preventDefault();
-        window.scrollBy(0, 0);
+        $("html, body").animate({scrollTop: 0}, duration);  // animate the scrolling event               
         return false;
       });
 
